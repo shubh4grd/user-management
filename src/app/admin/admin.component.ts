@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +12,7 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
   newUser: User = { username: '', password: '', role: 'Worker' };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router : Router) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -20,6 +21,11 @@ export class AdminComponent implements OnInit {
   loadUsers() {
     const users = localStorage.getItem('users');
     this.users = users ? JSON.parse(users) : [];
+  }  
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 
   addUser() {
