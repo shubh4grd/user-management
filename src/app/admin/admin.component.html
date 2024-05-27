@@ -1,0 +1,31 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>User Management Dashboard</h1>
+  </header>
+  <section class="user-list">
+    <h2>Users</h2>
+    <ul>
+      <li *ngFor="let user of users">
+        <span>{{ user.username }} ({{ user.role }})</span>
+        <button (click)="removeUser(user.username)">Remove</button>
+      </li>
+    </ul>
+  </section>
+  <section class="add-user">
+    <h2>Add New User</h2>
+    <div class="input-container">
+      <input type="text" placeholder="Username" [(ngModel)]="newUser.username">
+    </div>
+    <div class="input-container">
+      <input type="password" placeholder="Password" [(ngModel)]="newUser.password">
+    </div>
+    <div class="input-container">
+      <select [(ngModel)]="newUser.role">
+        <option value="Worker">Worker</option>
+        <option value="Supervisor">Supervisor</option>
+        <option value="Admin">Admin</option>
+      </select>
+    </div>
+    <button (click)="addUser()">Add User</button>
+  </section>
+</div>

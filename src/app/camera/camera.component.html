@@ -1,0 +1,9 @@
+<!-- src/app/camera/camera.component.html -->
+<div>
+    <button (click)="captureImage()">Capture Image</button>
+  </div>
+  <div *ngIf="capturedImage">
+    <img [src]="capturedImage" alt="Captured Image">
+    <button (click)="saveImage()">Save Image</button>
+  </div>
+  
