@@ -8,7 +8,7 @@
 
 1. Clone the repository:
     ```
-    git clone <repository_url>
+    git clone https://github.com/shubh4grd/user-management
     ```
 
 2. Navigate to the project directory:
