@@ -1,21 +1,20 @@
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.css'],
 })
-export class CameraComponent implements OnInit, OnDestroy {
+export class CameraComponent implements AfterViewInit, OnDestroy {
   @ViewChild('videoElement') videoElement!: ElementRef;
   video!: HTMLVideoElement;
   capturedImage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.video = this.videoElement?.nativeElement;
     this.startCamera();
   }
@@ -38,7 +37,7 @@ export class CameraComponent implements OnInit, OnDestroy {
     canvas.width = this.video?.videoWidth;
     canvas.height = this.video?.videoHeight;
     const ctx:any = canvas.getContext('2d');
-    ctx.drawImage(this.video, 0, 0);
+    ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
     this.capturedImage = canvas.toDataURL('image/png');
   }
 
