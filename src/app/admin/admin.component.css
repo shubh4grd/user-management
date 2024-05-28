@@ -63,9 +63,17 @@
   margin-bottom: 15px;
 }
 
+.input-container input{
+  width: 300px;
+}
+
+.input-container select{
+  width: 320px;
+}
+
+
 .input-container input,
 .input-container select {
-  width: 80%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
