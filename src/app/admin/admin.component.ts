@@ -57,4 +57,15 @@ export class AdminComponent implements OnInit {
     this.authService.removeUser(username);
     this.loadUsers(); // Refresh the user list
   }
+
+  updateUserRole(username: string, role: string) {
+    const user = this.users.find(u => u.username === username);
+    if (user) {
+      user.role = role;
+      localStorage.setItem('users', JSON.stringify(this.users)); // Update local storage
+      alert('Role updated successfully!');
+    } else {
+      alert('User not found');
+    }
+  }
 }

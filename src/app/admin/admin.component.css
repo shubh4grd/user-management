@@ -100,3 +100,68 @@
 .logout-button:hover {
   background-color: #c0392b;
 }
+
+.update-role-button {
+  background-color: #3498db !important;
+  color: white;
+  border: none;
+}
+
+.update-role-button:hover {
+  background-color: #2980b9;
+}
+
+.role-select {
+  padding: 8px 30px 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  font-size: 0.9em;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4L2 0zM2 5L0 3h4L2 5z"/></svg>');
+  /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.role-select:hover,
+.role-select:focus {
+  border-color: #888;
+  outline: none;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+.user-list li span {
+  flex-grow: 1;
+}
+
+.role-select {
+  margin-right: 10px;
+}
+
+.update-role-button,
+.remove-user-button {
+  margin-left: 10px;
+}
+
+.update-role-button,
+.remove-user-button,
+.role-select {
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Responsiveness: Adjust the width in responsive designs if needed */
+@media (max-width: 768px) {
+  .role-select {
+    width: 100%;
+    /* Full width on smaller screens */
+  }
+}

@@ -6,10 +6,18 @@
   <section class="user-list">
     <h2>Users</h2>
     <ul>
-      <li *ngFor="let user of users">
+      <ng-container *ngFor="let user of users">
+      <li *ngIf="user.role != 'Admin'">
         <span>{{ user.username }} ({{ user.role }})</span>
-        <button *ngIf="isAdmin" (click)="removeUser(user.username)">Remove</button>
+        <select *ngIf="isAdmin" [(ngModel)]="user.role" class="role-select">
+          <option value="Worker">Worker</option>
+          <option value="Supervisor">Supervisor</option>
+          <!-- <option value="Admin">Admin</option> -->
+        </select>
+        <button *ngIf="isAdmin" (click)="updateUserRole(user.username, user.role)" class="update-role-button">Update Role</button>
+        <button *ngIf="isAdmin" (click)="removeUser(user.username)" class="remove-user-button">Remove</button>
       </li>
+    </ng-container>
     </ul>
   </section>
   <section class="add-user" *ngIf="isAdmin">
@@ -24,7 +32,7 @@
       <select [(ngModel)]="newUser.role">
         <option value="Worker">Worker</option>
         <option value="Supervisor">Supervisor</option>
-        <option value="Admin">Admin</option>
+        <!-- <option value="Admin">Admin</option> -->
       </select>
     </div>
     <button (click)="addUser()">Add User</button>

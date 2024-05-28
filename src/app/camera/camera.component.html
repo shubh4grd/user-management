@@ -1,8 +1,15 @@
-<!-- src/app/camera/camera.component.html -->
-<div>
-  <button (click)="captureImage()">Capture Image</button>
-</div>
-<div *ngIf="capturedImage">
-  <img [src]="capturedImage" alt="Captured Image">
-  <button (click)="saveImage()">Save Image</button>
+<div class="capture-container">
+  <header class="capture-header">
+    <h1>Image Capture</h1>
+    <button (click)="logout()" class="logout-button">Logout</button>
+  </header>
+  <section class="capture-section">
+    <div>
+      <button (click)="captureImage()">Capture Image</button>
+    </div>
+    <div *ngIf="capturedImage">
+      <img [src]="capturedImage" alt="Captured Image">
+      <button (click)="saveImage()">Save Image</button>
+    </div>
+  </section>
 </div>
