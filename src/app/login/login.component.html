@@ -2,7 +2,7 @@
   <div class="input-container">
     <input type="text" placeholder="Username" [(ngModel)]="username" class="login-input">
   </div>
-  <div class="input-container">
+  <div class="input-container password-container">
     <input [type]="passwordFieldType" placeholder="Password" [(ngModel)]="password" class="login-input">
     <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
       <i [class]="passwordFieldType === 'password' ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
