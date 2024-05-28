@@ -16,7 +16,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.video = this.videoElement.nativeElement;
+    this.video = this.videoElement?.nativeElement;
     this.startCamera();
   }
 
@@ -56,8 +56,8 @@ export class CameraComponent implements OnInit, OnDestroy {
   }
 
   stopCamera() {
-    if (this.video.srcObject) {
-      (this.video.srcObject as MediaStream).getTracks().forEach(track => track.stop());
+    if (this.video?.srcObject) {
+      (this.video?.srcObject as MediaStream).getTracks().forEach(track => track.stop());
     }
   }
 
