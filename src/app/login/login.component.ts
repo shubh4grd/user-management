@@ -19,7 +19,12 @@ export class LoginComponent {
 
   login() {
     if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/dashboard']);
+      const currentUser:any = this.authService.getCurrentUser();
+      if (currentUser.role === 'Admin' || currentUser.role === 'Supervisor') {
+        this.router.navigate(['/dashboard']);
+      } else if (currentUser.role === 'Worker') {
+        this.router.navigate(['/capture']);
+      }
     } else {
       this.errorMessage = 'Invalid username or password';
     }

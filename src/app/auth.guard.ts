@@ -17,7 +17,12 @@ export class AuthGuard implements CanActivate {
 
     const roles = route.data['roles'] as Array<string>;
     if (roles && roles.indexOf(currentUser.role) === -1) {
-      this.router.navigate(['/login']);
+      // Redirect to appropriate page based on role
+      if (currentUser.role === 'Worker') {
+        this.router.navigate(['/capture']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
       return false;
     }
 
