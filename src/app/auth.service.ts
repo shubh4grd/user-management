@@ -1,4 +1,3 @@
-// src/app/auth.service.ts
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
 
@@ -6,13 +5,23 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private users = [
-    { username: 'admin', password: 'admin', role: 'Admin' },
-    { username: 'supervisor', password: 'supervisor', role: 'Supervisor' },
-    { username: 'worker', password: 'worker', role: 'Worker' }
-  ];
+  private users: User[] = [];
 
-  login(username: string, password: string) {
+  constructor() {
+    const savedUsers = localStorage.getItem('users');
+    if (savedUsers) {
+      this.users = JSON.parse(savedUsers);
+    } else {
+      this.users = [
+        { username: 'admin', password: 'admin', role: 'Admin' },
+        { username: 'supervisor', password: 'supervisor', role: 'Supervisor' },
+        { username: 'worker', password: 'worker', role: 'Worker' }
+      ];
+      localStorage.setItem('users', JSON.stringify(this.users));
+    }
+  }
+
+  login(username: string, password: string): boolean {
     const user = this.users.find(u => u.username === username && u.password === password);
     if (user) {
       localStorage.setItem('currentUser', JSON.stringify(user));
@@ -20,10 +29,10 @@ export class AuthService {
     }
     return false;
   }
-  
+
   register(user: User): boolean {
     if (this.users.find(existingUser => existingUser.username === user.username)) {
-      return false;
+      return false; // User with the same username already exists
     }
     this.users.push(user);
     localStorage.setItem('users', JSON.stringify(this.users));
@@ -34,23 +43,41 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 
-  getCurrentUser() {
+  getCurrentUser(): User | null {
     const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   }
 
-  isAdmin() {
-    const currentUser = this.getCurrentUser();
+  isAdmin(): boolean {
+    const currentUser:any = this.getCurrentUser();
     return currentUser && currentUser.role === 'Admin';
   }
 
-  isSupervisor() {
-    const currentUser = this.getCurrentUser();
+  isSupervisor(): boolean {
+    const currentUser:any = this.getCurrentUser();
     return currentUser && currentUser.role === 'Supervisor';
   }
 
-  isWorker() {
-    const currentUser = this.getCurrentUser();
+  isWorker(): boolean {
+    const currentUser:any = this.getCurrentUser();
     return currentUser && currentUser.role === 'Worker';
+  }
+
+  addUser(user: User): boolean {
+    if (this.users.find(existingUser => existingUser.username === user.username)) {
+      return false; // User with the same username already exists
+    }
+    this.users.push(user);
+    localStorage.setItem('users', JSON.stringify(this.users));
+    return true;
+  }
+
+  removeUser(username: string): void {
+    this.users = this.users.filter(user => user.username !== username);
+    localStorage.setItem('users', JSON.stringify(this.users));
+  }
+
+  getUsers(): User[] {
+    return this.users;
   }
 }

@@ -8,11 +8,11 @@
     <ul>
       <li *ngFor="let user of users">
         <span>{{ user.username }} ({{ user.role }})</span>
-        <button (click)="removeUser(user.username)">Remove</button>
+        <button *ngIf="isAdmin" (click)="removeUser(user.username)">Remove</button>
       </li>
     </ul>
   </section>
-  <section class="add-user">
+  <section class="add-user" *ngIf="isAdmin">
     <h2>Add New User</h2>
     <div class="input-container">
       <input type="text" placeholder="Username" [(ngModel)]="newUser.username">
